@@ -1,0 +1,25 @@
+{
+    "name": "zhzhwcn/simple-admin",
+    "description": "",
+    "authors": [
+        {
+            "name": "zhzhwcn",
+            "email": "zhzhwmail@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations",
+			"src/controllers",
+			"src/models"
+        ],
+        "psr-0": {
+            "Zhzhwcn\\SimpleAdmin\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
