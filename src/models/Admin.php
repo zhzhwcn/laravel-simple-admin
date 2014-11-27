@@ -1,23 +1,25 @@
 <?php
-namespace Zhzhwcn\SimpleAdmin;
 
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\UserTrait;
+use Illuminate\Auth\UserInterface;
+use Illuminate\Auth\Reminders\RemindableTrait;
+use Illuminate\Auth\Reminders\RemindableInterface;
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class AdminGuard extends Guard
-{
-    public function getName()
-    {
-        return 'admin_login_'.md5(get_class($this));
-    }
+class Admin extends Eloquent implements UserInterface, RemindableInterface {
 
-    public function getRecallerName()
-    {
-        return 'admin_remember_'.md5(get_class($this));
+	use UserTrait, RemindableTrait, SoftDeletingTrait;
+
+	/**
+	 * The attributes excluded from the model's JSON form.
+	 *
+	 * @var array
+	 */
+	protected $hidden = array('password', 'remember_token');
+
+
+    public function __construct(){
+        parent::__construct();
+        $this->table = Config::get('simple-admin::auth.auth_table');
     }
 }
-
-Auth::extend('eloquent.admin', function()
-{
-    dd('test');
-    return new AdminGuard(new EloquentUserProvider(new BcryptHasher, 'Admin'), App::make('session.store'));
-});

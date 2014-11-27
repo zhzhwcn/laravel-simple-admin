@@ -18,8 +18,8 @@ class AdminController extends BaseController
 
     public function postLogin()
     {
-    	$admin_auth = app()['adminAuth'];
-    	if ($admin_auth->attempt(
+    	// $admin_auth = app()['adminAuth'];
+    	if (Auth::attempt(
     			array(
     				'username'=>Input::get('username'),
     				'password'=>Input::get('password'),

@@ -21,11 +21,7 @@ class SimpleAdminServiceProvider extends ServiceProvider {
 	{
 		$this->package('zhzhwcn/simple-admin');
 		//include our filters, view composers, and routes
-		Config::set('auth.driver','database');
-        $this->app->bindShared('adminAuth', function ($app) {
-            $app['adminAuth.loaded'] = true;
-            return new AdminAuth($app);
-        });
+		include __DIR__.'/../../Admin.php';
 		include __DIR__.'/../../filters.php';
 		include __DIR__.'/../../viewComposers.php';
 		include __DIR__.'/../../routes.php';
